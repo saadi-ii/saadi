@@ -8,7 +8,12 @@ const db = async (): Promise<void> => {
     if (!uri) {
         throw new Error("MONGODB_URI environment variable is not set")
     }
-    await mongoose.connect(uri)
+
+    console.log("URI exists:", !!process.env.MONGODB_URI);
+
+await mongoose.connect(uri);
+
+console.log("Connected to database");
     console.log("Connected to database")
 }
 

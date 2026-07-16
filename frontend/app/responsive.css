@@ -1,0 +1,42 @@
+/* responsive.css */
+
+/* Extra Small Devices (Phones, less than 640px) */
+@media (max-width: 639px) {
+  /* Add mobile-specific custom CSS here */
+  html {
+    font-size: 14px; /* Scale down base font size slightly on mobile */
+  }
+  
+  /* Example: Adjust padding or margins globally for mobile if needed */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Small Devices (Tablets, 640px to 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
+  /* Add tablet-specific custom CSS here */
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Medium Devices (Large Tablets/Small Laptops, 768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Add large tablet/small laptop-specific custom CSS here */
+}
+
+/* Large Devices (Desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  /* Desktop-specific custom CSS can go here */
+  html {
+    font-size: 16px;
+  }
+}
+
+/* General responsive utilities that might not be in Tailwind by default */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
