@@ -13,19 +13,19 @@ import mongoose from "mongoose"
 //     console.log("Connected to database")
 // }
 
-// export default db
 
 
 const db = async (): Promise<void> => {
     const uri = process.env.MONGODB_URI
-
+    
     console.log("URI exists:", !!uri)
-
+    
     if (!uri) {
         throw new Error("MONGODB_URI environment variable is not set")
     }
-
+    
     await mongoose.connect(uri)
-
+    
     console.log("✅ Connected to database")
 }
+export default db
