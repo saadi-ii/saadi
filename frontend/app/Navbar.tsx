@@ -20,7 +20,8 @@ const playfair = Playfair({
     display: "swap",
 })
 
-const Navbar: React.FC = () => {
+export default function Navbar() {
+
     const [scrolled, setScrolled] = useState<boolean>(false)
 
     useEffect(() => {
@@ -63,6 +64,3 @@ const Navbar: React.FC = () => {
         </div>
     )
 }
-
-export default Navbar
-``
