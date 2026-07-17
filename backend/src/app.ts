@@ -4,6 +4,7 @@ import personalModel from "./model/personal.model"
 import contactModel from "./model/contact.model"
 import skillsModel from "./model/skills.model"
 import projectModel from "./model/project.model"
+require("dotenv").config()
 
 const app: Application = express()
 
@@ -12,10 +13,13 @@ app.use(cors({
     // In production, replace process.env.FRONTEND_URL with your deployed frontend URL
     origin: process.env.FRONTEND_URL
         ? [process.env.FRONTEND_URL]
-        : ["http://localhost:3000", "http://localhost:3001"],
+        : ["http://localhost:3000", "http://localhost:3001", "https://saadii-eta.vercel.app"],
     methods: ["GET", "POST"],
     credentials: true,
 }))
+
+
+
 
 app.post("/contact", async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
