@@ -9,7 +9,7 @@ const teko = Teko({
     weight: ["700"],
 })
 
-const API_BASE = "http://localhost:7000"
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:7000"
 
 type FormStatus = "idle" | "loading" | "success" | "error" | ""
 
