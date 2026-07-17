@@ -6,6 +6,46 @@
   html {
     font-size: 14px; /* Scale down base font size slightly on mobile */
   }
+
+  /* Navbar Responsive Styles */
+  .navbar-container {
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    padding: 1rem !important;
+  }
+  
+  .navbar-hamburger {
+    display: flex !important;
+    align-items: center;
+  }
+  
+  .navbar-menu {
+    display: none !important;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .navbar-menu.open {
+    display: flex !important;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    font-size: 1.25rem !important; /* somewhat smaller */
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+  
+  .navbar-socials {
+    justify-content: center !important;
+    gap: 1.5rem !important;
+  }
+
+  .social-icon {
+    width: 1.5rem !important; /* somewhat smaller */
+    height: 1.5rem !important;
+  }
   
   /* Example: Adjust padding or margins globally for mobile if needed */
   .container {
