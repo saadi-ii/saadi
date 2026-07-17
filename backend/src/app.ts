@@ -10,11 +10,21 @@ const app: Application = express()
 
 app.use(express.json())
 app.use(cors({
-    // In production, replace process.env.FRONTEND_URL with your deployed frontend URL
-    origin: process.env.FRONTEND_URL
-        ? [process.env.FRONTEND_URL]
-        : ["http://localhost:3000", "http://localhost:3001", "https://saadii-eta.vercel.app"],
-    methods: ["GET", "POST"],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl)
+        if (!origin) return callback(null, true);
+        
+        const allowedOrigins = process.env.FRONTEND_URL 
+            ? process.env.FRONTEND_URL.split(',').map(url => url.trim().replace(/\/$/, ''))
+            : ["http://localhost:3000", "http://localhost:3001", "https://saadii-eta.vercel.app"];
+            
+        if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ["GET", "POST", "OPTIONS"],
     credentials: true,
 }))
 
