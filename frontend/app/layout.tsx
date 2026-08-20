@@ -4,7 +4,7 @@ import "./globals.css";
 import "./responsive.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import PageTransition from "./PageTransition";
+import RouteRemount from "./RouteRemount";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -153,7 +153,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col antialiased bg-background text-on-surface">
         <Navbar />
         <main className="flex-1 w-full" style={{ paddingTop: 'var(--size-nav-h)' }}>
-          <PageTransition>{children}</PageTransition>
+          <RouteRemount>{children}</RouteRemount>
         </main>
         <Footer />
       </body>
