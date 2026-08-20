@@ -79,7 +79,18 @@ app.get("/project", async (_req: Request, res: Response, next: NextFunction): Pr
     }
 })
 
-// Global error handler — catches any error passed to next()
+app.get("/coverProject", async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const data = await projectModel.find({
+            importance:"true"
+        })
+        res.status(200).json({ data })
+    } catch (err) {
+        next(err)
+    }
+    
+})
+
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction): void => {
     console.error("Server error:", err)
     res.status(500).json({ message: "Internal server error" })

@@ -5,6 +5,7 @@ export interface IProject extends Document {
     projectName?: string
     url?: string
     description?: string
+    importance?:string
 }
 
 const projectSchema: Schema<IProject> = new Schema({
@@ -12,6 +13,7 @@ const projectSchema: Schema<IProject> = new Schema({
     projectName: String,
     url: String,
     description: String,
+    importance:String
 })
 
 const projectModel: Model<IProject> = mongoose.model<IProject>("project", projectSchema)

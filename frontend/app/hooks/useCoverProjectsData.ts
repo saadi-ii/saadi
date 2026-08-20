@@ -12,20 +12,20 @@ export interface Project {
   importance?: string
 }
 
-interface UseProjectsDataReturn {
+interface useCoverProjectsDataReturn {
   projects: Project[]
   loading: boolean
   error: unknown
 }
 
-export function useProjectsData(): UseProjectsDataReturn {
+export function useCoverProjectsData(): useCoverProjectsDataReturn {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<unknown>(null)
 
   useEffect(() => {
     axios
-      .get<{ data: Project[] }>(`${API_BASE}/project`)
+      .get<{ data: Project[] }>(`${API_BASE}/coverProject`)
       .then((res) => {
         // Backend returns { data: [...] }
         setProjects(res.data.data ?? [])

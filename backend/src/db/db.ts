@@ -1,11 +1,7 @@
 import mongoose from "mongoose"
 
-// dotenv is loaded once in server.ts (the entry point).
-// Do NOT import dotenv/config here to avoid double-loading.
 
 const db = async (): Promise<void> => {
-    // In serverless environments like Vercel, global variables persist across invocations.
-    // We cache the Mongoose connection to prevent creating a new connection on every request.
     let cached = (global as any).mongoose;
 
     if (!cached) {
@@ -23,7 +19,7 @@ const db = async (): Promise<void> => {
         }
 
         cached.promise = mongoose.connect(uri).then((m) => {
-            console.log("✅ Connected to database (Serverless Cached)");
+            console.log("Connected to database (Serverless Cached)");
             return m;
         });
     }

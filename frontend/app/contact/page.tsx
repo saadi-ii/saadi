@@ -1,28 +1,15 @@
-import React from 'react'
-import Pic from "./Pic"
-import Contact from "./Contact"
-import ContactDetails from "./ContactDetails"
-import FreeLance from "./FreeLance"
-import Form from "./Form"
+import type { Metadata } from "next";
+import ContactContent from "./ContactContent";
 
-const page: React.FC = () => {
-  return (
-    <div className='bg-gray-300 '>
-      <div className='bg-gray-800 h-80 flex items-center justify-around'>
-        <Contact/>
-        <div className='self-end  relative top-40'><Pic/></div>
-    </div>
-    <div className='mt-15 p-10'>
-        <ContactDetails/>
-    </div>
-    <div className='mt-15 p-10'>
-        <FreeLance/>
-    </div>
-    <div className='p-20'>
-        <Form/>
-    </div>
-    </div>
-  )
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with Saad Hameed for full stack web development projects — Next.js, React and Node.js applications built with clean code and modern design.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
+
+export default function ContactPage() {
+  return <ContactContent />;
 }
-
-export default page

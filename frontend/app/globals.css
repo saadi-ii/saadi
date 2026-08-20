@@ -1,36 +1,385 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens — Editorial Noir
+ * Single source of truth for color, spacing and radius. Change a value here
+ * and it propagates everywhere (Tailwind utilities + typography classes below).
+ * Colors are re-declared under [data-theme="light"] for the light-mode toggle.
+ *
+ * Raw tokens live under --tok-* and are re-exposed to Tailwind's theme via
+ * `@theme inline` below (as var() references, not literals) so a runtime
+ * attribute change (`[data-theme="light"]`) can actually repaint utilities
+ * like `bg-surface`/`text-on-surface` — giving the same name to both the raw
+ * token and the theme key makes Tailwind bake a static value instead.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  /* Surfaces */
+  --tok-color-background: #16130b;
+  --tok-color-surface: #16130b;
+  --tok-color-surface-dim: #16130b;
+  --tok-color-surface-bright: #3d392f;
+  --tok-color-surface-container-lowest: #110e07;
+  --tok-color-surface-container-low: #1f1b13;
+  --tok-color-surface-container: #231f17;
+  --tok-color-surface-container-high: #2d2a20;
+  --tok-color-surface-container-highest: #38342b;
+
+  /* Text on surfaces */
+  --tok-color-on-background: #eae2d4;
+  --tok-color-on-surface: #eae2d4;
+  --tok-color-on-surface-variant: #c4c7c7;
+
+  /* Outlines */
+  --tok-color-outline: #8e9192;
+  --tok-color-outline-variant: #444748;
+
+  /* Primary / secondary (neutral greys) */
+  --tok-color-primary: #c9c6c5;
+  --tok-color-on-primary: #313030;
+  --tok-color-secondary: #c8c6c5;
+  --tok-color-on-secondary: #313030;
+
+  /* Accent — champagne */
+  --tok-color-tertiary: #d5c5a5;
+  --tok-color-tertiary-dim: #bfae8a;
+  --tok-color-on-tertiary: #392f19;
+
+  /* Feedback */
+  --tok-color-success: #86efac;
+  --tok-color-success-container: #16301f;
+  --tok-color-error: #ffb4ab;
+  --tok-color-error-container: #3a0a08;
+
+  /* Radius */
+  --tok-radius-editorial-sm: 0.25rem;
+  --tok-radius-editorial: 0.375rem;
+  --tok-radius-editorial-lg: 0.5rem;
+
+  /* Layout rhythm */
+  --size-container-max: 1320px;
+  --size-gutter: 32px;
+  --size-gutter-sm: 20px;
+  --size-stack-sm: 12px;
+  --size-stack-md: 24px;
+  --size-stack-lg: 48px;
+  --size-section-v-lg: 160px;
+  --size-section-v-lg-mobile: 80px;
+  --size-section-v-md: 120px;
+  --size-section-v-md-mobile: 64px;
+  --size-nav-h: 60px;
+}
+
+/* Light mode — same editorial system, warm paper palette instead of obsidian */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --tok-color-background: #f7f3ea;
+  --tok-color-surface: #f7f3ea;
+  --tok-color-surface-dim: #ece5d5;
+  --tok-color-surface-bright: #ffffff;
+  --tok-color-surface-container-lowest: #ffffff;
+  --tok-color-surface-container-low: #f1ebdd;
+  --tok-color-surface-container: #ebe3d1;
+  --tok-color-surface-container-high: #e2d8c1;
+  --tok-color-surface-container-highest: #d8cbae;
+
+  --tok-color-on-background: #1d1a12;
+  --tok-color-on-surface: #1d1a12;
+  --tok-color-on-surface-variant: #5a564a;
+
+  --tok-color-outline: #8e8778;
+  --tok-color-outline-variant: #d9d0bc;
+
+  --tok-color-primary: #3a3a3a;
+  --tok-color-on-primary: #f5f2ea;
+  --tok-color-secondary: #46433c;
+  --tok-color-on-secondary: #f5f2ea;
+
+  --tok-color-tertiary: #8a6d3f;
+  --tok-color-tertiary-dim: #6f5731;
+  --tok-color-on-tertiary: #ffffff;
+
+  --tok-color-success: #1f7a43;
+  --tok-color-success-container: #d7f2df;
+  --tok-color-error: #b3261e;
+  --tok-color-error-container: #fbdedb;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--tok-color-background);
+  --color-surface: var(--tok-color-surface);
+  --color-surface-dim: var(--tok-color-surface-dim);
+  --color-surface-bright: var(--tok-color-surface-bright);
+  --color-surface-container-lowest: var(--tok-color-surface-container-lowest);
+  --color-surface-container-low: var(--tok-color-surface-container-low);
+  --color-surface-container: var(--tok-color-surface-container);
+  --color-surface-container-high: var(--tok-color-surface-container-high);
+  --color-surface-container-highest: var(--tok-color-surface-container-highest);
+
+  --color-on-background: var(--tok-color-on-background);
+  --color-on-surface: var(--tok-color-on-surface);
+  --color-on-surface-variant: var(--tok-color-on-surface-variant);
+
+  --color-outline: var(--tok-color-outline);
+  --color-outline-variant: var(--tok-color-outline-variant);
+
+  --color-primary: var(--tok-color-primary);
+  --color-on-primary: var(--tok-color-on-primary);
+  --color-secondary: var(--tok-color-secondary);
+  --color-on-secondary: var(--tok-color-on-secondary);
+
+  --color-tertiary: var(--tok-color-tertiary);
+  --color-tertiary-dim: var(--tok-color-tertiary-dim);
+  --color-on-tertiary: var(--tok-color-on-tertiary);
+
+  --color-success: var(--tok-color-success);
+  --color-success-container: var(--tok-color-success-container);
+  --color-error: var(--tok-color-error);
+  --color-error-container: var(--tok-color-error-container);
+
+  --radius-editorial-sm: var(--tok-radius-editorial-sm);
+  --radius-editorial: var(--tok-radius-editorial);
+  --radius-editorial-lg: var(--tok-radius-editorial-lg);
+
+  --container-container-max: var(--size-container-max);
+
+  --spacing-gutter: var(--size-gutter);
+  --spacing-gutter-sm: var(--size-gutter-sm);
+  --spacing-stack-sm: var(--size-stack-sm);
+  --spacing-stack-md: var(--size-stack-md);
+  --spacing-stack-lg: var(--size-stack-lg);
+  --spacing-section-v-lg: var(--size-section-v-lg);
+  --spacing-section-v-md: var(--size-section-v-md);
+  --spacing-nav-h: var(--size-nav-h);
+
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--tok-color-outline-variant);
+  }
+
+  html {
+    background: var(--tok-color-background);
+    scroll-behavior: smooth;
+    transition: background-color 400ms ease;
+  }
+
+  body {
+    background: var(--tok-color-background);
+    color: var(--tok-color-on-surface);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 400ms ease, color 400ms ease;
+  }
+
+  ::selection {
+    background: var(--tok-color-tertiary);
+    color: var(--tok-color-on-tertiary);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+ * Typography scale — Editorial Noir
+ * Centralized so every page pulls the same headline/body sizes.
+ */
+@layer components {
+  .text-display-lg {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .text-display-md {
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+  }
+  .text-headline-lg {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+  .text-body-lg {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+  .text-body-md {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+  .text-label-caps {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .text-nav-link {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .text-display-lg {
+      font-size: 84px;
+      letter-spacing: -0.04em;
+    }
+    .text-display-md {
+      font-size: 64px;
+      letter-spacing: -0.03em;
+    }
+    .text-headline-lg {
+      font-size: 48px;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  /* Editorial building blocks reused across pages */
+  .editorial-container {
+    width: 100%;
+    max-width: var(--size-container-max);
+    margin-inline: auto;
+    padding-inline: var(--size-gutter-sm);
+  }
+  @media (min-width: 768px) {
+    .editorial-container {
+      padding-inline: var(--size-gutter);
+    }
+  }
+
+  .editorial-section {
+    padding-block: var(--size-section-v-md-mobile);
+  }
+  @media (min-width: 768px) {
+    .editorial-section {
+      padding-block: var(--size-section-v-md);
+    }
+  }
+
+  .editorial-section-lg {
+    padding-block: var(--size-section-v-lg-mobile);
+  }
+  @media (min-width: 768px) {
+    .editorial-section-lg {
+      padding-block: var(--size-section-v-lg);
+    }
+  }
+
+  .editorial-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--tok-color-tertiary);
+    color: var(--tok-color-on-tertiary);
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background-color 500ms ease;
+  }
+  .editorial-btn-primary:hover {
+    background: var(--tok-color-on-surface);
+  }
+
+  .editorial-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--tok-color-outline-variant) 60%, transparent);
+    color: var(--tok-color-on-surface);
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: border-color 500ms ease, color 500ms ease;
+  }
+  .editorial-btn-secondary:hover {
+    border-color: var(--tok-color-tertiary);
+    color: var(--tok-color-tertiary);
+  }
+
+  .editorial-link {
+    position: relative;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--tok-color-on-surface);
+    transition: border-color 300ms ease, color 300ms ease;
+  }
+  .editorial-link:hover {
+    border-color: var(--tok-color-tertiary);
+    color: var(--tok-color-tertiary);
+  }
+
+  .theme-icon-sun {
+    display: inline-flex;
+  }
+  .theme-icon-moon {
+    display: none;
+  }
+  :root[data-theme="light"] .theme-icon-sun {
+    display: none;
+  }
+  :root[data-theme="light"] .theme-icon-moon {
+    display: inline-flex;
+  }
+
+  .marquee-track {
+    animation: marquee-scroll 32s linear infinite;
+  }
+  .marquee-track-reverse {
+    animation: marquee-scroll-reverse 32s linear infinite;
+  }
+  .marquee-row:hover .marquee-track,
+  .marquee-row:hover .marquee-track-reverse {
+    animation-play-state: paused;
+  }
 }
 
-/* ── Navbar: scrolled state (scrollY > 0) ── */
-/* These styles apply when the user has scrolled down; they are removed when back at the top */
-.scrolled {
-  backdrop-filter: blur(12px);
-  background-color: rgba(17, 24, 39, 0.85) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  padding-top: 4px !important;
-  padding-bottom: 4px !important;
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .marquee-track-reverse {
+    animation: none;
+  }
 }

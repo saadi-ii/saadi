@@ -34,7 +34,6 @@ export function usePersonalData(): UsePersonalDataReturn {
     axios
       .get<{ data: PersonalData[] }>(`${API_BASE}/about`)
       .then((res) => {
-        // Backend returns { data: [...] }, grab first document
         const record = res.data.data?.[0] ?? null
         setData(record)
       })

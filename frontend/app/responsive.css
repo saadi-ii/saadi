@@ -1,82 +1,16 @@
-/* responsive.css */
+/* responsive.css — small global responsive helpers not covered by Tailwind utilities */
 
-/* Extra Small Devices (Phones, less than 640px) */
-@media (max-width: 639px) {
-  /* Add mobile-specific custom CSS here */
-  html {
-    font-size: 14px; /* Scale down base font size slightly on mobile */
-  }
-
-  /* Navbar Responsive Styles */
-  .navbar-container {
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    padding: 1rem !important;
-  }
-  
-  .navbar-hamburger {
-    display: flex !important;
-    align-items: center;
-  }
-  
-  .navbar-menu {
-    display: none !important;
-    width: 100%;
-    flex-direction: column;
-    margin-top: 1rem;
-  }
-
-  .navbar-menu.open {
-    display: flex !important;
-  }
-
-  .navbar-links {
-    flex-direction: column;
-    font-size: 1.25rem !important; /* somewhat smaller */
-    margin-bottom: 1rem;
-    gap: 1rem;
-  }
-  
-  .navbar-socials {
-    justify-content: center !important;
-    gap: 1.5rem !important;
-  }
-
-  .social-icon {
-    width: 1.5rem !important; /* somewhat smaller */
-    height: 1.5rem !important;
-  }
-  
-  /* Example: Adjust padding or margins globally for mobile if needed */
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+/* Skip images/videos that already carry explicit width+height attributes
+   (e.g. next/image without `fill`) — forcing height:auto on those breaks
+   their intrinsic aspect ratio and triggers Next.js's console warning. */
+img:not([width]),
+video:not([width]) {
+  max-width: 100%;
+  height: auto;
 }
 
-/* Small Devices (Tablets, 640px to 767px) */
-@media (min-width: 640px) and (max-width: 767px) {
-  /* Add tablet-specific custom CSS here */
+@media (max-width: 639px) {
   html {
     font-size: 15px;
   }
-}
-
-/* Medium Devices (Large Tablets/Small Laptops, 768px to 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Add large tablet/small laptop-specific custom CSS here */
-}
-
-/* Large Devices (Desktops, 1024px and up) */
-@media (min-width: 1024px) {
-  /* Desktop-specific custom CSS can go here */
-  html {
-    font-size: 16px;
-  }
-}
-
-/* General responsive utilities that might not be in Tailwind by default */
-img, video {
-  max-width: 100%;
-  height: auto;
 }

@@ -1,20 +1,15 @@
-import React from 'react'
-import About from './About'
-import Pic from './Pic'
-import Details from './Details'
+import type { Metadata } from "next";
+import AboutContent from "./AboutContent";
 
-const page: React.FC = () => {
-  return (
-    <div className='bg-gray-300 '>
-      <div className='bg-gray-800 h-80 flex items-center justify-around'>
-        <About/>
-        <div className='self-end  relative top-40'><Pic/></div>
-    </div>
-    <div className='mt-15 p-10'>
-        <Details/>
-    </div>
-    </div>
-  )
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn more about Saad Hameed, a full stack web developer specializing in Next.js, React and Node.js — his background, skills and experience.",
+  alternates: {
+    canonical: "/about",
+  },
+};
+
+export default function AboutPage() {
+  return <AboutContent />;
 }
-
-export default page
